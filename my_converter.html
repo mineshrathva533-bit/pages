@@ -3,912 +3,835 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Image Converter – Convert JPG, PNG, WEBP, GIF</title>
     <meta name="description" content="Convert images online instantly between JPG, PNG, WEBP, and GIF formats. Free, secure, and no watermarks.">
     <meta name="keywords" content="image converter, jpg to png, png to webp, gif to png, online image conversion">
-    <title>Free Online Image Converter – Convert JPG, PNG, WEBP, GIF</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* Global Styles - Matching your resizer exactly */
         :root {
-            --primary-color: #4a6bff;
+            --primary-color: #4361ee;
+            --primary-light: #4cc9f0;
             --secondary-color: #f8f9fa;
-            --dark-color: #343a40;
+            --accent-color: #f72585;
+            --dark-color: #14213d;
             --light-color: #ffffff;
-            --text-color: #495057;
-            --border-color: #dee2e6;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            --border-radius: 0.5rem;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--secondary-color);
+            color: #333;
+            overflow-x: hidden;
         }
         
-        a {
-            text-decoration: none;
-            color: var(--primary-color);
+        @supports (font-variation-settings: normal) {
+            body { font-family: 'Inter var', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
         }
         
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--light-color);
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background-color: #3a56d4;
-            transform: translateY(-2px);
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: var(--light-color);
-        }
-        
-        /* Header Styles - Identical to your resizer */
-        header {
-            background-color: var(--light-color);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Header/Navbar */
+        .navbar {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             padding: 15px 0;
+            background-color: var(--light-color);
+            transition: all 0.3s ease;
         }
         
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-color);
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
-        .logo span {
-            color: var(--dark-color);
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.6rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-flex;
+            align-items: center;
         }
         
-        .nav-links {
-            display: flex;
-            list-style: none;
+        .navbar-brand i {
+            margin-right: 8px;
+            font-size: 1.8rem;
         }
         
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            color: var(--dark-color);
+        .nav-link {
             font-weight: 500;
-            transition: color 0.3s ease;
+            padding: 0.5rem 1.2rem;
+            color: var(--dark-color);
+            position: relative;
+            transition: all 0.3s ease;
         }
         
-        .nav-links a:hover {
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
             color: var(--primary-color);
         }
         
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--dark-color);
-        }
-        
-        /* Hero Section - Same styling */
-        .hero {
-            padding: 80px 0;
-            text-align: center;
-            background-color: var(--light-color);
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--dark-color);
-        }
-        
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: var(--text-color);
-        }
-        
-        /* Upload Section - Same structure as resizer */
-        .upload-section {
-            padding: 60px 0;
-            background-color: var(--secondary-color);
-        }
-        
-        .tool-container {
-            background-color: var(--light-color);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .upload-box {
+        .nav-link:hover:before {
             width: 100%;
-            border: 2px dashed var(--border-color);
-            border-radius: 8px;
-            padding: 40px;
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .nav-link.active:before {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-converter {
+            background: var(--gradient);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .hero-converter h1 {
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-converter p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Upload Area */
+        .upload-area {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin: 3rem auto;
+            max-width: 900px;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .upload-container {
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            padding: 3rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 30px;
+            background: #f9fafb;
         }
         
-        .upload-box:hover {
+        .upload-container:hover {
             border-color: var(--primary-color);
+            background: rgba(67, 97, 238, 0.05);
         }
         
-        .upload-box.drag-over {
-            border-color: var(--primary-color);
-            background-color: rgba(74, 107, 255, 0.05);
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
         }
         
-        .upload-box h3 {
-            margin-bottom: 10px;
-            color: var(--dark-color);
-        }
-        
-        .upload-box p {
-            margin: 15px 0;
-            color: var(--text-color);
-        }
-        
-        .file-input-label {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--primary-color);
+        .btn-upload {
+            background: var(--gradient);
             color: white;
-            border-radius: 5px;
-            cursor: pointer;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
             transition: all 0.3s ease;
         }
         
-        .file-input-label:hover {
-            background-color: #3a56d4;
+        .btn-upload:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            color: white;
         }
         
-        .file-input {
-            display: none;
-        }
-        
-        /* Preview Section - Same as resizer */
-        .preview-container {
-            display: none;
-            margin-bottom: 30px;
-        }
-        
-        .preview-wrapper {
+        /* Converter Controls */
+        .converter-controls {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: var(--secondary-color);
+            border-radius: 8px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .format-selection {
+            display: flex;
             align-items: center;
             justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .format-selection label {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .format-selection select {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .btn-convert {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .btn-convert:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        
+        /* Preview Section */
+        .preview-section {
+            display: none;
+            margin-top: 2rem;
+        }
+        
+        .image-comparison {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .image-container {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .image-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
         }
         
         .image-preview {
             max-width: 100%;
             max-height: 300px;
             border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .preview-info {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-            color: var(--text-color);
-        }
-        
-        /* Controls Section - Modified for converter */
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 30px;
-            justify-content: center;
-        }
-        
-        .control-group {
-            flex: 1;
-            min-width: 200px;
-            max-width: 300px;
-        }
-        
-        .control-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            text-align: center;
-        }
-        
-        .format-select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            font-size: 16px;
-            text-align: center;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            width: 100%;
-        }
-        
-        /* Benefits Section - Same as resizer */
-        .benefits {
-            padding: 60px 0;
-            background-color: var(--light-color);
-        }
-        
-        .benefits h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--dark-color);
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .benefit-card {
-            text-align: center;
-            padding: 30px 20px;
+        .file-info {
+            background: var(--secondary-color);
             border-radius: 8px;
-            background-color: var(--secondary-color);
-            transition: transform 0.3s ease;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
         }
         
-        .benefit-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .benefit-card i {
-            font-size: 40px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-        
-        .benefit-card h3 {
-            margin-bottom: 15px;
-            color: var(--dark-color);
-        }
-        
-        /* FAQ Section - Same as resizer */
-        .faq {
-            padding: 60px 0;
-            background-color: var(--secondary-color);
-        }
-        
-        .faq h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--dark-color);
-        }
-        
-        .faq-item {
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: var(--light-color);
-        }
-        
-        .faq-question {
-            padding: 20px;
-            font-weight: 600;
-            cursor: pointer;
+        .file-info-item {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            background-color: var(--light-color);
+            margin-bottom: 0.8rem;
         }
         
-        .faq-question:hover {
-            background-color: #f8f9fa;
+        .file-info-label {
+            font-weight: 600;
+            color: var(--dark-color);
         }
         
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
+        .file-info-value {
+            font-weight: 500;
         }
         
-        .faq-item.active .faq-answer {
-            max-height: 300px;
-            padding: 0 20px 20px;
+        .btn-download {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
         
-        /* Ad Sections - Same as resizer */
-        .ad-section {
-            padding: 20px 0;
-            text-align: center;
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
             background-color: var(--secondary-color);
         }
         
-        /* Footer - Identical to resizer */
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 0;
+        }
+        
+        .accordion-item {
+            margin-bottom: 1rem;
+            border-radius: 8px !important;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .accordion-button {
+            font-weight: 600;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+        }
+        
+        /* Footer */
         footer {
             background-color: var(--dark-color);
             color: var(--light-color);
-            padding: 60px 0 20px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
+            padding: 4rem 0 1.5rem;
         }
         
         .footer-links a {
             color: #adb5bd;
-            transition: color 0.3s ease;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
         
         .footer-links a:hover {
-            color: var(--light-color);
+            color: white;
         }
         
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #495057;
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
             color: #adb5bd;
-            font-size: 14px;
         }
         
-        /* Responsive Styles - Same as resizer */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
+        /* Ad Sections */
+        .ad-section {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 2rem 0;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #ccc;
         }
         
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
+            .hero-converter h1 {
+                font-size: 2.2rem;
             }
             
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background-color: var(--light-color);
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+            
+            .upload-container {
+                padding: 2rem 1rem;
+            }
+            
+            .image-comparison {
                 flex-direction: column;
-                align-items: center;
-                padding-top: 30px;
-                transition: left 0.3s ease;
-            }
-            
-            .nav-links.active {
-                left: 0;
-            }
-            
-            .nav-links li {
-                margin: 15px 0;
-            }
-            
-            .hero {
-                padding: 60px 0;
-            }
-            
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .preview-wrapper {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero {
-                padding: 40px 0;
-            }
-            
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .tool-container {
-                padding: 20px;
-            }
-            
-            .upload-box {
-                padding: 30px 15px;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header - Same as resizer -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">Image<span>Tools</span></a>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fas fa-crop-alt"></i>ImageTools</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="tools.html">Tools</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="#" class="btn">Get Started</a></li>
-                </ul>
-            </nav>
-        </div>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="converter.html">Tools</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
 
-    <!-- Ad Section Top - Same as resizer -->
-    <div class="ad-section">
-        <div class="container">
-            <!-- ADSENSE_TOP -->
-            <div style="background-color: #f0f0f0; height: 90px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                <p>Advertisement</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section - Modified for converter -->
-    <section class="hero">
+    <section class="hero-converter">
         <div class="container">
             <h1>Convert Image Formats Online for Free</h1>
-            <p>Easily convert between JPG, PNG, WEBP, and GIF formats without losing quality. No registration required.</p>
+            <p class="lead">Easily convert between JPG, PNG, WEBP, and GIF formats without losing quality.</p>
         </div>
     </section>
 
-    <!-- Upload Section - Same structure as resizer but for conversion -->
-    <section class="upload-section">
-        <div class="container">
-            <div class="tool-container">
-                <div class="upload-box" id="upload-box">
-                    <h3>Drag & Drop Your Image Here</h3>
-                    <p>or</p>
-                    <label for="file-input" class="file-input-label">Select Image</label>
-                    <input type="file" id="file-input" class="file-input" accept="image/jpeg, image/png, image/webp, image/gif">
-                </div>
-
-                <div class="preview-container" id="preview-container">
-                    <div class="preview-wrapper">
-                        <div>
-                            <img id="original-preview" class="image-preview" src="" alt="Original Image">
-                            <p class="preview-info" id="original-info"></p>
-                        </div>
-                        <div>
-                            <img id="converted-preview" class="image-preview" src="" alt="Converted Image">
-                            <p class="preview-info" id="converted-info"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <div class="control-group">
-                        <label for="format-select">Output Format</label>
-                        <select id="format-select" class="format-select">
-                            <option value="">Select format</option>
-                            <option value="jpg">JPG</option>
-                            <option value="png">PNG</option>
-                            <option value="webp">WEBP</option>
-                            <option value="gif">GIF</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="action-buttons">
-                    <button id="convert-btn" class="btn" disabled>Convert Image</button>
-                    <button id="download-btn" class="btn btn-outline" disabled>Download</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ad Section Middle - Same as resizer -->
-    <div class="ad-section">
-        <div class="container">
-            <!-- ADSENSE_MIDDLE -->
-            <div style="background-color: #f0f0f0; height: 90px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+    <section class="container">
+        <div class="ad-section">
+            <div style="background-color: #f0f0f0; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
                 <p>Advertisement</p>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Benefits Section - Same as resizer -->
-    <section class="benefits">
-        <div class="container">
-            <h2>Why Choose Our Image Converter</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <i class="fas fa-dollar-sign"></i>
-                    <h3>100% Free</h3>
-                    <p>Convert as many images as you want without any cost or hidden charges.</p>
+    <section class="container">
+        <div class="upload-area">
+            <div class="upload-container" id="uploadContainer">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
                 </div>
-                <div class="benefit-card">
-                    <i class="fas fa-lock"></i>
-                    <h3>Secure</h3>
-                    <p>Your images are processed in your browser and never uploaded to our servers.</p>
+                <h3>Drag & Drop Your Image Here</h3>
+                <p>or</p>
+                <button class="btn btn-upload">Select Image</button>
+                <input type="file" id="fileInput" accept="image/jpeg, image/png, image/webp, image/gif" style="display: none;">
+            </div>
+            
+            <div class="converter-controls" id="converterControls" style="display: none;">
+                <div class="format-selection">
+                    <label for="formatSelect">Convert To:</label>
+                    <select id="formatSelect" class="form-select">
+                        <option value="">Select format</option>
+                        <option value="jpg">JPG</option>
+                        <option value="png">PNG</option>
+                        <option value="webp">WEBP</option>
+                    </select>
                 </div>
-                <div class="benefit-card">
-                    <i class="fas fa-tint"></i>
-                    <h3>No Watermarks</h3>
-                    <p>Download converted images without any watermarks or branding.</p>
+                <button class="btn btn-convert w-100" id="convertBtn" disabled>
+                    <i class="fas fa-exchange-alt me-2"></i> Convert Image
+                </button>
+            </div>
+            
+            <div class="preview-section" id="previewSection">
+                <div class="image-comparison">
+                    <div class="image-container">
+                        <div class="image-label">Original Image</div>
+                        <img id="originalPreview" class="image-preview" alt="Original Preview">
+                        <div class="file-info-value" id="originalInfo"></div>
+                    </div>
+                    <div class="image-container">
+                        <div class="image-label">Converted Image</div>
+                        <img id="convertedPreview" class="image-preview" alt="Converted Preview">
+                        <div class="file-info-value" id="convertedInfo"></div>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <i class="fas fa-globe"></i>
-                    <h3>Works Anywhere</h3>
-                    <p>Access our tool from any device with a modern web browser.</p>
+                
+                <div class="file-info">
+                    <div class="file-info-item">
+                        <span class="file-info-label">File Name:</span>
+                        <span class="file-info-value" id="fileName"></span>
+                    </div>
+                    <div class="file-info-item">
+                        <span class="file-info-label">Original Size:</span>
+                        <span class="file-info-value" id="originalSize"></span>
+                    </div>
+                    <div class="file-info-item">
+                        <span class="file-info-label">Converted Size:</span>
+                        <span class="file-info-value" id="convertedSize">N/A</span>
+                    </div>
+                    <a href="#" class="btn btn-download w-100 mt-3" id="downloadBtn" download="converted_image" disabled>
+                        <i class="fas fa-download me-2"></i> Download Converted Image
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section - Modified for converter -->
+    <section class="container">
+        <div class="ad-section">
+            <div style="background-color: #f0f0f0; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
+                <p>Advertisement</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Why Use Our Image Converter</h2>
+                <p class="lead">Everything you need for perfect image conversion</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3>100% Free</h3>
+                        <p>No hidden charges or subscriptions. Convert as many images as you want.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Secure Processing</h3>
+                        <p>Your images are processed in your browser and never uploaded to our servers.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>No Watermarks</h3>
+                        <p>Get clean, professional results without any annoying watermarks.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Works Anywhere</h3>
+                        <p>Use our tool on any device - desktop, tablet, or mobile phone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="faq">
         <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Is this tool free to use?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes, our image converter is completely free to use. You can convert as many images as you want without any cost or limitations.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Which image formats are supported?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>We support all major image formats including JPG, PNG, WEBP, and GIF. You can convert between any of these formats.</p>
+            <div class="text-center mb-5">
+                <h2>Frequently Asked Questions</h2>
+                <p class="lead">Find answers to common questions about image conversion</p>
+            </div>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Is this tool free to use?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, our image converter is completely free to use with no hidden charges. You can convert as many images as you want without any limitations.
+                        </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Does conversion affect image quality?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>We use advanced conversion algorithms to preserve as much quality as possible. However, some formats like JPG are lossy by nature, so there might be minimal quality loss when converting to these formats.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Is my image data secure?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Absolutely! All processing happens in your browser. Your images are never uploaded to our servers, ensuring complete privacy.</p>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Do you store my images after conversion?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            No, all image processing happens directly in your browser. Your files are never uploaded to our servers, ensuring complete privacy and security.
+                        </div>
                     </div>
                 </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can I convert multiple images at once?</span>
-                        <i class="fas fa-chevron-down"></i>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Does conversion affect image quality?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We use advanced conversion algorithms to preserve as much quality as possible. However, some formats like JPG are lossy by nature, so there might be minimal quality loss when converting to these formats.
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>Currently, our tool supports converting one image at a time. For batch conversions, you would need to process each image individually.</p>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Can I convert multiple images at once?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Currently, our tool supports converting one image at a time. For batch conversions, you would need to process each image individually.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            What image formats do you support?
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We support all major image formats including JPG, PNG, WEBP, and GIF. The converted image will be in the same format as the original.
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ad Section Bottom - Same as resizer -->
-    <div class="ad-section">
-        <div class="container">
-            <!-- ADSENSE_BOTTOM -->
-            <div style="background-color: #f0f0f0; height: 90px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                <p>Advertisement</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer - Same as resizer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Tools</h3>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-white">ImageTools</h5>
+                    <p class="text-muted">Free online tools for all your image editing needs. No registration required.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="text-white">Tools</h5>
                     <ul class="footer-links">
-                        <li><a href="#">Image Converter</a></li>
-                        <li><a href="#">Image Resizer</a></li>
-                        <li><a href="#">Image Compressor</a></li>
-                        <li><a href="#">Background Remover</a></li>
+                        <li><a href="#">Compressor</a></li>
+                        <li><a href="#">Resizer</a></li>
+                        <li><a href="#">Converter</a></li>
+                        <li><a href="#">Cropper</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Company</h3>
+                <div class="col-md-2">
+                    <h5 class="text-white">Company</h5>
                     <ul class="footer-links">
                         <li><a href="#">About Us</a></li>
-                        <li><a href="#">Our Team</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Feedback</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">GDPR</a></li>
+                        <li><a href="#">Terms of Service</a></li>
                     </ul>
+                </div>
+                <div class="col-md-4">
+                    <div class="ad-section h-100">
+                        <div style="background-color: #f0f0f0; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <p>Advertisement</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 ImageTools. All rights reserved.</p>
+            <div class="copyright text-center">
+                <p class="mb-0">&copy; 2023 ImageTools. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        // Mobile Menu Toggle - Same as resizer
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-        
-        // FAQ Accordion - Same as resizer
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            
-            question.addEventListener('click', () => {
-                item.classList.toggle('active');
-                
-                const icon = question.querySelector('i');
-                icon.className = item.classList.contains('active') ? 
-                    'fas fa-chevron-up' : 'fas fa-chevron-down';
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadContainer = document.getElementById('uploadContainer');
+            const fileInput = document.getElementById('fileInput');
+            const converterControls = document.getElementById('converterControls');
+            const previewSection = document.getElementById('previewSection');
+            const originalPreview = document.getElementById('originalPreview');
+            const convertedPreview = document.getElementById('convertedPreview');
+            const originalInfo = document.getElementById('originalInfo');
+            const convertedInfo = document.getElementById('convertedInfo');
+            const fileNameSpan = document.getElementById('fileName');
+            const originalSizeSpan = document.getElementById('originalSize');
+            const convertedSizeSpan = document.getElementById('convertedSize');
+            const formatSelect = document.getElementById('formatSelect');
+            const convertBtn = document.getElementById('convertBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+
+            let originalImage = null;
+            let originalFile = null;
+            let convertedBlob = null;
+
+            // Handle file upload click
+            uploadContainer.addEventListener('click', () => fileInput.click());
+
+            // Handle drag and drop
+            uploadContainer.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadContainer.style.borderColor = '#4361ee';
+                uploadContainer.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
             });
-        });
-        
-        // Image Converter Functionality
-        const uploadBox = document.getElementById('upload-box');
-        const fileInput = document.getElementById('file-input');
-        const previewContainer = document.getElementById('preview-container');
-        const originalPreview = document.getElementById('original-preview');
-        const convertedPreview = document.getElementById('converted-preview');
-        const originalInfo = document.getElementById('original-info');
-        const convertedInfo = document.getElementById('converted-info');
-        const formatSelect = document.getElementById('format-select');
-        const convertBtn = document.getElementById('convert-btn');
-        const downloadBtn = document.getElementById('download-btn');
-        
-        let originalImage = null;
-        let originalFormat = '';
-        let convertedImageDataUrl = '';
-        
-        // Handle file upload - Similar to resizer but with format detection
-        function handleFileUpload(file) {
-            if (!file.type.match('image.*')) {
-                alert('Please select an image file (JPG, PNG, WEBP, or GIF).');
-                return;
-            }
-            
-            if (file.size > 10 * 1024 * 1024) {
-                alert('File size exceeds 10MB limit.');
-                return;
-            }
-            
-            // Detect file format
-            const fileName = file.name.toLowerCase();
-            if (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) {
-                originalFormat = 'jpg';
-            } else if (fileName.endsWith('.png')) {
-                originalFormat = 'png';
-            } else if (fileName.endsWith('.webp')) {
-                originalFormat = 'webp';
-            } else if (fileName.endsWith('.gif')) {
-                originalFormat = 'gif';
-            } else {
-                originalFormat = file.type.split('/')[1] || '';
-            }
-            
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                originalImage = new Image();
-                originalImage.onload = function() {
-                    originalPreview.src = e.target.result;
-                    convertedPreview.src = e.target.result;
-                    originalInfo.textContent = `${this.width} × ${this.height} px | ${originalFormat.toUpperCase()}`;
-                    convertedInfo.textContent = 'Select format and convert';
-                    
-                    previewContainer.style.display = 'block';
-                    
-                    // Scroll to preview
-                    previewContainer.scrollIntoView({ behavior: 'smooth' });
+
+            uploadContainer.addEventListener('dragleave', () => {
+                uploadContainer.style.borderColor = '#ccc';
+                uploadContainer.style.backgroundColor = '#f9fafb';
+            });
+
+            uploadContainer.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadContainer.style.borderColor = '#ccc';
+                uploadContainer.style.backgroundColor = '#f9fafb';
+                if (e.dataTransfer.files.length) {
+                    handleFileSelection(e.dataTransfer.files[0]);
+                }
+            });
+
+            // Handle file selection
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    handleFileSelection(e.target.files[0]);
+                }
+            });
+
+            function handleFileSelection(file) {
+                if (!file.type.match('image/jpeg|image/png|image/webp|image/gif')) {
+                    alert('Please select a JPG, PNG, WEBP, or GIF image.');
+                    return;
+                }
+                originalFile = file;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    originalImage = new Image();
+                    originalImage.onload = function() {
+                        originalPreview.src = e.target.result;
+                        convertedPreview.src = '';
+                        convertedInfo.textContent = 'Select format and convert';
+
+                        const fileExtension = originalFile.name.split('.').pop().toUpperCase();
+                        originalInfo.textContent = `${this.width} × ${this.height} px | ${fileExtension}`;
+                        fileNameSpan.textContent = originalFile.name;
+                        originalSizeSpan.textContent = formatFileSize(originalFile.size);
+                        convertedSizeSpan.textContent = 'N/A';
+
+                        converterControls.style.display = 'flex';
+                        previewSection.style.display = 'block';
+                        downloadBtn.disabled = true;
+                        formatSelect.value = '';
+
+                        converterControls.scrollIntoView({ behavior: 'smooth' });
+                    };
+                    originalImage.src = e.target.result;
                 };
-                originalImage.src = e.target.result;
-            };
-            
-            reader.readAsDataURL(file);
-        }
-        
-        // Upload box click - Same as resizer
-        uploadBox.addEventListener('click', (e) => {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
-                fileInput.click();
+                reader.readAsDataURL(file);
             }
-        });
-        
-        // File input change - Same as resizer
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleFileUpload(e.target.files[0]);
+
+            // Enable convert button when format is selected
+            formatSelect.addEventListener('change', function() {
+                convertBtn.disabled = !this.value || !originalImage;
+            });
+
+            // Convert and update preview
+            convertBtn.addEventListener('click', async () => {
+                const outputFormat = formatSelect.value;
+                if (!outputFormat || !originalImage) {
+                    alert('Please select a format and an image.');
+                    return;
+                }
+
+                convertBtn.disabled = true;
+                convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Converting...';
+                downloadBtn.disabled = true;
+
+                const canvas = document.createElement('canvas');
+                canvas.width = originalImage.width;
+                canvas.height = originalImage.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(originalImage, 0, 0);
+
+                const mimeType = `image/${outputFormat === 'jpg' ? 'jpeg' : outputFormat}`;
+                
+                try {
+                    convertedBlob = await new Promise(resolve => canvas.toBlob(resolve, mimeType, 0.92));
+                    const convertedDataUrl = URL.createObjectURL(convertedBlob);
+                    
+                    convertedPreview.src = convertedDataUrl;
+                    convertedInfo.textContent = `${originalImage.width} × ${originalImage.height} px | ${outputFormat.toUpperCase()}`;
+                    convertedSizeSpan.textContent = formatFileSize(convertedBlob.size);
+                    
+                    downloadBtn.disabled = false;
+                    downloadBtn.href = convertedDataUrl;
+                    downloadBtn.setAttribute('download', `converted_image.${outputFormat}`);
+                } catch (error) {
+                    console.error('Conversion error:', error);
+                    alert('An error occurred during conversion. Please try again.');
+                } finally {
+                    convertBtn.disabled = false;
+                    convertBtn.innerHTML = '<i class="fas fa-exchange-alt me-2"></i> Convert Image';
+                }
+            });
+
+            // Format file size utility
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
             }
-        });
-        
-        // Drag and drop - Same as resizer
-        uploadBox.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadBox.classList.add('drag-over');
-        });
-        
-        uploadBox.addEventListener('dragleave', () => {
-            uploadBox.classList.remove('drag-over');
-        });
-        
-        uploadBox.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadBox.classList.remove('drag-over');
-            
-            if (e.dataTransfer.files.length > 0) {
-                handleFileUpload(e.dataTransfer.files[0]);
-            }
-        });
-        
-        // Enable convert button when format is selected
-        formatSelect.addEventListener('change', function() {
-            convertBtn.disabled = !this.value || !originalImage;
-        });
-        
-        // Convert image
-        convertBtn.addEventListener('click', () => {
-            const outputFormat = formatSelect.value;
-            
-            if (!outputFormat) {
-                alert('Please select an output format.');
-                return;
-            }
-            
-            if (!originalImage) {
-                alert('Please upload an image first.');
-                return;
-            }
-            
-            const canvas = document.createElement('canvas');
-            canvas.width = originalImage.width;
-            canvas.height = originalImage.height;
-            
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(originalImage, 0, 0);
-            
-            // Determine MIME type
-            let mimeType;
-            switch (outputFormat) {
-                case 'jpg':
-                    mimeType = 'image/jpeg';
-                    break;
-                case 'png':
-                    mimeType = 'image/png';
-                    break;
-                case 'webp':
-                    mimeType = 'image/webp';
-                    break;
-                case 'gif':
-                    mimeType = 'image/gif';
-                    break;
-                default:
-                    mimeType = 'image/png';
-            }
-            
-            // Convert to selected format
-            canvas.toBlob(function(blob) {
-                convertedImageDataUrl = URL.createObjectURL(blob);
-                convertedPreview.src = convertedImageDataUrl;
-                convertedInfo.textContent = `${originalImage.width} × ${originalImage.height} px | ${outputFormat.toUpperCase()}`;
-                downloadBtn.disabled = false;
-            }, mimeType, 0.92);
-        });
-        
-        // Download image
-        downloadBtn.addEventListener('click', () => {
-            if (!convertedImageDataUrl) return;
-            
-            const link = document.createElement('a');
-            const fileName = `converted-image.${formatSelect.value}`;
-            link.download = fileName;
-            link.href = convertedImageDataUrl;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
         });
     </script>
 </body>
