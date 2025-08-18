@@ -771,9 +771,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 animate-on-scroll delay-1">
+                <div class="col-lg-6 animate-on-scroll delay-1" style="text-align: center;">
                     <div class="floating">
-                        <img src="https://via.placeholder.com/600x500/4361ee/ffffff?text=Image+Tools" alt="Hero Illustration" class="img-fluid rounded-4 shadow-lg" loading="lazy">
+                        <div id="hello-animation" style="font-size: 5rem; color: white; font-weight: 800; opacity: 1; transition: opacity 1s ease-in-out;">Hello</div>
                     </div>
                 </div>
             </div>
@@ -1130,57 +1130,14 @@
             });
         });
         
-        document.addEventListener("DOMContentLoaded", function() {
-            if ('loading' in HTMLImageElement.prototype) {
-                const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-                lazyImages.forEach(img => {
-                    img.src = img.dataset.src;
-                });
-            } else {
-                const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
-                
-                if ("IntersectionObserver" in window) {
-                    let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-                        entries.forEach(function(entry) {
-                            if (entry.isIntersecting) {
-                                let lazyImage = entry.target;
-                                lazyImage.src = lazyImage.dataset.src;
-                                lazyImage.classList.remove("lazy");
-                                lazyImageObserver.unobserve(lazyImage);
-                            }
-                        });
-                    });
-                    
-                    lazyImages.forEach(function(lazyImage) {
-                        lazyImageObserver.observe(lazyImage);
-                    });
-                }
+        // Hello animation
+        const helloText = document.getElementById('hello-animation');
+        if (helloText) {
+            function toggleOpacity() {
+                helloText.style.opacity = helloText.style.opacity === '1' ? '0.3' : '1';
             }
-        });
-        
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('section');
-        
-        window.addEventListener('scroll', function() {
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                
-                if (pageYOffset >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}` || 
-                   (link.getAttribute('href') === '#' && current === '')) {
-                    link.classList.add('active');
-                }
-            });
-        });
+            setInterval(toggleOpacity, 2000); // Fade in/out every 2 seconds
+        }
     </script>
 </body>
 </html>
