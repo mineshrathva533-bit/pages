@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy & Terms of Use - ImageTools</title>
+    <meta name="description" content="Read our privacy policy on how we handle your data and the terms of use for our free online image editing tools.">
+    <meta name="keywords" content="privacy policy, terms of use, terms and conditions, data privacy, image tools privacy, website policy">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #4cc9f0;
+            --secondary-color: #f8f9fa;
+            --accent-color: #f72585;
+            --dark-color: #14213d;
+            --light-color: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
+            --border-radius-main: 16px;
+            --border-radius-small: 8px;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background-color: var(--light-color);
+        }
+        
+        @supports (font-variation-settings: normal) {
+            body { font-family: 'Inter var', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
+        }
+        
+        /* Header/Navbar */
+        .navbar {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 15px 0;
+            background-color: var(--light-color);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.6rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-right: 8px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1.2rem;
+            color: var(--dark-color);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-link:hover:before {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .nav-link.active:before {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-legal {
+            background: var(--gradient);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .hero-legal h1 {
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-legal p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Legal Content Section */
+        .legal-section {
+            padding: 4rem 0;
+        }
+        
+        .legal-section h2 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .legal-section h3 {
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .legal-section p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .legal-section ul {
+            padding-left: 1.5rem;
+        }
+        
+        .legal-section ul li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        
+        .last-updated {
+            display: block;
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 1rem;
+            color: #888;
+        }
+        
+        /* Ad Sections */
+        .ad-section {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: var(--border-radius-small);
+            margin: 2rem 0;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #ccc;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 4rem 0 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            color: #adb5bd;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-legal h1 {
+                font-size: 2.2rem;
+            }
+            .legal-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="#"><i class="fas fa-crop-alt"></i>ImageTools</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="compressor.html">Tools</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-legal">
+        <div class="container">
+            <h1>Privacy Policy & Terms of Use</h1>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="ad-section">
+            <div style="background-color: #f0f0f0; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
+                <p>Advertisement</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="legal-section">
+        <div class="container">
+            <div class="card p-4 mb-5" style="border-radius: var(--border-radius-main); box-shadow: var(--shadow-light);">
+                <h2>Privacy Policy</h2>
+                <p>
+                    Your privacy is important to us. This policy explains how we handle your data when you use our online tools.
+                </p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check-circle me-2 text-success"></i>
+                        <strong>No Permanent Storage:</strong> We do not store your uploaded images on our servers after processing. All image manipulation happens securely in your web browser.
+                    </li>
+                    <li><i class="fas fa-check-circle me-2 text-success"></i>
+                        <strong>Secure Processing:</strong> Your files are processed locally on your device, ensuring your data remains private and secure.
+                    </li>
+                    <li><i class="fas fa-check-circle me-2 text-success"></i>
+                        <strong>Cookies and Analytics:</strong> We may use cookies for essential functionality, website analytics (to understand how our tools are used), and to serve relevant advertisements. These do not store personal information.
+                    </li>
+                    <li><i class="fas fa-check-circle me-2 text-success"></i>
+                        <strong>Respect for Privacy:</strong> We are committed to respecting your privacy and will never sell or share your personal information.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="ad-section">
+                <div style="background-color: #f0f0f0; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
+                    <p>Advertisement</p>
+                </div>
+            </div>
+
+            <div class="card p-4 mt-5" style="border-radius: var(--border-radius-main); box-shadow: var(--shadow-light);">
+                <h2>Terms of Use</h2>
+                <p>
+                    By using our tools, you agree to the following terms and conditions.
+                </p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check-circle me-2 text-success"></i>
+                        <strong>Free for All:</strong> Our tools are completely free for both personal and commercial use.
+                    </li>
+                    <li><i class="fas fa-check-circle me-2 text-success"></i>
+                        <strong>User Responsibility:</strong> You are solely responsible for the content you upload and the use of the final output. Ensure you have the right to use the images you upload.
+                    </li>
+                    <li><i class="fas fa-check-circle me-2 text-success"></i>
+                        <strong>No Liability:</strong> We are not liable for any damages or losses that may arise from the use or misuse of our tools. We provide the service "as is" without warranty.
+                    </li>
+                </ul>
+            </div>
+
+            <span class="last-updated">This Privacy Policy and Terms of Use may be updated anytime. Last updated: [August 18, 2025].</span>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-white">ImageTools</h5>
+                    <p class="text-muted">Free online tools for all your image editing needs. No registration required.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="text-white">Tools</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Compressor</a></li>
+                        <li><a href="#">Resizer</a></li>
+                        <li><a href="#">Converter</a></li>
+                        <li><a href="#">Cropper</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="text-white">Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <div class="ad-section h-100">
+                        <div style="background-color: #f0f0f0; height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
+                            <p>Advertisement</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <p class="mb-0">&copy; 2023 ImageTools. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
